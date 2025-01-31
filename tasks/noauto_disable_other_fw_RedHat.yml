@@ -3,17 +3,12 @@
   when: iptables_disable_firewalld
   block:
     - name: Check if firewalld package is installed
-      ansible.builtin.command:
-        cmd: dnf list installed firewalld
-      register: iptables_firewalld_installed
-      ignore_errors: true
-      changed_when: false
-      check_mode: false
+      ansible.builtin.package_facts:
+        manager: auto
 
     - name: Disable the firewalld service
       ansible.builtin.service:
         name: firewalld
         state: stopped
         enabled: false
-      when:
-        - iptables_firewalld_installed.rc == 0
+      when: "'firewalld' in ansible_facts.packages"

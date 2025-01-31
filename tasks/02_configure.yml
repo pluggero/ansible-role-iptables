@@ -13,7 +13,7 @@
         owner: root
         group: root
         mode: 0744
-      notify: restart firewall
+      notify: Restart Firewall
 
     - name: Copy firewall init script into place
       ansible.builtin.template:
@@ -34,7 +34,7 @@
       when: "ansible_service_mgr == 'systemd'"
 
     - name: Configure the firewall service
-      service:
+      ansible.builtin.service:
         name: firewall
         state: "{{ iptables_state }}"
         enabled: "{{ iptables_enabled }}"

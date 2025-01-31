@@ -1,0 +1,19 @@
+---
+- name: Disable the ufw firewall
+  when: iptables_disable_ufw
+  block:
+    - name: Check if ufw package is installed
+      ansible.builtin.command:
+        cmd: pacman -Q ufw
+      register: iptables_ufw_installed
+      ignore_errors: true
+      changed_when: false
+      check_mode: false
+
+    - name: Disable the ufw firewall
+      ansible.builtin.service:
+        name: ufw
+        state: stopped
+        enabled: false
+      when:
+        - iptables_ufw_installed.rc == 0

@@ -1,0 +1,24 @@
+---
+- name: Converge
+  hosts: all
+
+  vars:
+    ansible_user:
+      root
+
+      # Added to prevent test failures in CI.
+    iptables_enable_ipv6: false
+
+    # Added for a test.
+    iptables_allowed_tcp_ports:
+      - "9123"
+
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
+
+  roles:
+    - role: pluggero.iptables

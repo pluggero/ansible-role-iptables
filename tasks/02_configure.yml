@@ -2,7 +2,7 @@
 - name: Configure iptables
   block:
     - name: Flush iptables rules if playbook runs for the first time
-      ansible.buildin.command:
+      ansible.builtin.command:
         cmd: iptables -F
         creates: /etc/firewall.bash
 

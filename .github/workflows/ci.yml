@@ -48,7 +48,7 @@ jobs:
         distro:
           - debian12
           - archlinux
-          - ubuntu2204
+          - ubuntu2404
           - rockylinux9
 
     steps:

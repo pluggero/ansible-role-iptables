@@ -11,4 +11,5 @@
         name: ufw
         state: stopped
         enabled: false
+      become: true
       when: "'ufw' in ansible_facts.packages"

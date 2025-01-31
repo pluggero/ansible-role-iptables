@@ -5,6 +5,7 @@
       ansible.builtin.command:
         cmd: iptables -F
         creates: /etc/firewall.bash
+      become: true
 
     - name: Copy firewall script into place
       ansible.builtin.template:
@@ -13,6 +14,7 @@
         owner: root
         group: root
         mode: 0744
+      become: true
       notify: Restart Firewall
 
     - name: Copy firewall init script into place
@@ -22,6 +24,7 @@
         owner: root
         group: root
         mode: 0755
+      become: true
       when: "ansible_service_mgr != 'systemd'"
 
     - name: Copy firewall systemd unit file into place (for systemd systems)
@@ -31,6 +34,7 @@
         owner: root
         group: root
         mode: 0644
+      become: true
       when: "ansible_service_mgr == 'systemd'"
 
     - name: Configure the firewall service
@@ -38,3 +42,4 @@
         name: firewall
         state: "{{ iptables_state }}"
         enabled: "{{ iptables_enabled }}"
+      become: true

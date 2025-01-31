@@ -11,4 +11,5 @@
         name: firewalld
         state: stopped
         enabled: false
+      become: true
       when: "'firewalld' in ansible_facts.packages"

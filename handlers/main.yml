@@ -3,3 +3,4 @@
   ansible.builtin.service:
     name: firewall
     state: restarted
+  become: true

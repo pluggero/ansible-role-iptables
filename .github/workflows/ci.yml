@@ -36,7 +36,7 @@ jobs:
           yamllint .
 
       - name: Run ansible-lint
-        uses: ansible/ansible-lint@9bce2bfb8f4a984e6b13767bc0d6bf0a49492164 # v26.10.1
+        uses: ansible/ansible-lint@b5609548ec49df35aabb89b6cb71de8f398cd195 # v26.11.1
         with:
           working_directory: "pluggero.iptables"
 
